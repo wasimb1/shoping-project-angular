@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-xs-12">
+        <form>
+            <fieldset>
+                <div class="row my-3">
+                    <div class="col-sm-7 mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Name</span>
+                            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" #ingName>
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="input-group">
+                            <span class="input-group-text" id="inputGroup-sizing-default">Amount</span>
+                            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" #ingAmount>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <textarea type="text" class="form-control" aria-label="Sizing example input"
+                           placeholder="Description" aria-describedby="inputGroup-sizing-default" #ingDesc></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button class="btn btn-success btn-sm mx-1 px-3" type="submit" (click)="addIngredient()">Add</button>
+                        <button class="btn btn-warning btn-sm mx-1 px-3" type="button" (click)="clearForm()">Clear</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

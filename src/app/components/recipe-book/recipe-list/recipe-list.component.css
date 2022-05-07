@@ -1,0 +1,12 @@
+.card.recipe-card {
+  border-radius: 12px;
+}
+
+.card .recipe-card-body {
+  padding: 8px;
+}
+
+.recipeList {
+  max-height: 400px !important;
+  overflow: auto;
+}

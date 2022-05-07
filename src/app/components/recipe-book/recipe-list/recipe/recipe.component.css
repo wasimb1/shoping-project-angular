@@ -1,0 +1,22 @@
+.card .recipe-images {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    /* object-fit: cover;
+    object-position: bottom; */
+}
+
+.card.recipe {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 4px;
+}
+
+.card.recipe .card-body {
+    padding: 4px;
+}
+
+.card.recipe .card-body .stretched-link {
+    cursor: pointer;
+}

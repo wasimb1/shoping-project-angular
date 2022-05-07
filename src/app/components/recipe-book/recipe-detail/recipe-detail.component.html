@@ -1,0 +1,72 @@
+<div class="row">
+  <!-- Function buttons -->
+  <div class="col-sm-12 mb-2">
+    <ul class="nav nav-pills rounded justify-content-end align-items-center">
+      <li class="nav-item pe-3">
+        <a class="btn btn-success btn-sm" aria-current="page" href="#" (click)="addToShopList()"><i class="fas fa-cart-plus me-2"></i>Add</a>
+      </li>
+      <li class="nav-items pe-3">
+        <a class="btn btn-warning btn-sm" aria-current="page" href="#"><i class="fas fa-edit me-2"></i>Edit</a>
+      </li>
+      <li class="nav-item pe-3">
+        <a class="btn btn-danger btn-sm" aria-current="page" href="#"><i class="fas fa-trash me-2"></i>Delete</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Image-Carousel -->
+  <div class="col-sm-12 m-1">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner rounded">
+        <div class="carousel-item active">
+          <img [src]="recipe.imagePath" class="d-block w-100  img-fluid img-details" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://st3.depositphotos.com/13324256/17303/i/1600/depositphotos_173034766-stock-photo-woman-writing-down-recipe.jpg"
+            class="d-block w-100 img-fluid img-details" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img
+            src="https://images.pexels.com/photos/4551832/pexels-photo-4551832.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            class="d-block w-100 img-fluid img-details" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="col-sm-12 px-3 mt-1">
+    <p class="fs-2">{{recipe.name}}</p>
+  </div>
+  <div class="col-sm-12 px-3 mb-1">
+    <p class="mb-2 px-1">
+      <a class="fw-bold text-decoration-none" data-bs-toggle="collapse" href="#collapseExample" role="button"
+        aria-expanded="false" aria-controls="collapseExample">
+        See description<i class="fas fa-plus ms-2"></i>
+      </a>
+    </p>
+    <div class="collapse px-1" id="collapseExample">
+      <div class="card card-body">
+        {{recipe.description}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="card recipe">
+    <img [src]="recipe.imagePath" class="img-fluid recipe-images" alt="..." />
+    <div class="card-body">
+        <h5 class="card-title">{{ recipe.name }}</h5>
+        <p class="card-text mb-1">{{ recipe.description }}</p>
+        <p class="card-text mb-1">
+            <small class="text-muted">Last updated 3 mins ago</small>
+        </p>
+        <a (click)="getRecipeItem(recipe)" class="stretched-link"></a>
+    </div>
+</div>

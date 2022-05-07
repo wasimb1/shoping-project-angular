@@ -1,0 +1,10 @@
+<div class="card recipe">
+  <div class="card-body">
+    <h5 class="card-title">{{ recipeItem.name }}</h5>
+    <p class="card-text mb-1">{{ recipeItem.description }}</p>
+    <p class="card-text mb-1">
+      <small class="text-muted">Last updated 3 mins ago</small>
+    </p>
+    <a (click)="getRecipeItem(recipeItem)" class="stretched-link"></a>
+  </div>
+</div>
