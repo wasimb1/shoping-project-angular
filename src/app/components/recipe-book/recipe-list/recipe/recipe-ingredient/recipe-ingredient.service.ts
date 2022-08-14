@@ -1,11 +1,12 @@
 import { RecipeIngredient } from '../../../../../models/recipe-ingredient.model';
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeIngredientService {
   recipeItems: RecipeIngredient[] = [];
+  recipeItemAdded = new EventEmitter<RecipeIngredient[]>();
 
   constructor() {
     this.recipeItems = [
@@ -35,11 +36,12 @@ export class RecipeIngredientService {
   }
 
   getRecipeItems() {
-    return this.recipeItems;
+    return this.recipeItems.slice(0);
   }
 
   addIngredient(newIngredient: RecipeIngredient) {
     console.log(newIngredient);
     this.recipeItems.push(newIngredient);
+    this.recipeItemAdded.emit(this.recipeItems.slice());
   }
 }

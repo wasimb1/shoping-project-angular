@@ -26,7 +26,13 @@ export class ShoppingEditComponent implements OnInit {
       desc,
       amount
     );
-    this.recipeIngredientService.addIngredient(newRecipeIngredient);
+    if (
+      newRecipeIngredient.name &&
+      newRecipeIngredient.description &&
+      newRecipeIngredient.amount
+    )
+      this.recipeIngredientService.addIngredient(newRecipeIngredient);
+    else alert('All fields are required');
   }
 
   clearForm() {

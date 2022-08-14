@@ -8,7 +8,11 @@ import { RecipeIngredientService } from '../recipe-book/recipe-list/recipe/recip
 })
 export class ShoppingListComponent implements OnInit {
   ingredients: RecipeIngredient[] = [];
-  constructor(private recipeIngredientService: RecipeIngredientService) {}
+  constructor(private recipeIngredientService: RecipeIngredientService) {
+    this.recipeIngredientService.recipeItemAdded.subscribe(
+      (newIngredientList) => (this.ingredients = newIngredientList)
+    );
+  }
 
   ngOnInit(): void {
     this.ingredients = this.recipeIngredientService.getRecipeItems();

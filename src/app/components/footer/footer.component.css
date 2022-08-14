@@ -1,21 +1,11 @@
 .footerRow{
     justify-content: space-around;
-    background-color: aliceblue;
 }
 
-.footerCols{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.footerColItems{
+    padding-left: 1.5rem;
 }
 
-.footerCols .footerColItems{
-    list-style: none;
-    padding-left: 8px;
-}
-
-@media ( max-width: 600px){
-    .footerCols h3{
-        font-size: 1rem;
-    }
+.footer-main{
+    background-color: azure;
 }
