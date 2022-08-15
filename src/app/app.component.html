@@ -1,9 +1,9 @@
 <div class="container-fluid app-root">
-  <app-header></app-header>
+  <app-header (slectedPage)="onSelectedPage($event)"></app-header>
   <div class="container-fluid m-1">
     <div class="row">
       <div class="col-md-12">
-        <app-recipe-book></app-recipe-book>
+        <app-recipe-book [selectedPage]="selPage"></app-recipe-book>
       </div>
 
       <!-- <div class="col-md-12">

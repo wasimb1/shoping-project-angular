@@ -1,4 +1,4 @@
-<div class="row ">
+<div class="row" *ngIf="selectedPage === 'recipe-list'">
     <div class="col-sm-6">
         <app-recipe-list></app-recipe-list>
     </div>
@@ -10,5 +10,7 @@
            </div>
         </ng-template>
     </div>
-    
+</div>
+<div class="container-fluid" *ngIf="selectedPage === 'shoping-list'">
+    <app-shopping-list></app-shopping-list>
 </div>
