@@ -1,12 +1,13 @@
 import { RecipeIngredient } from '../../../../../models/recipe-ingredient.model';
 import { Injectable, EventEmitter } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeIngredientService {
   recipeItems: RecipeIngredient[] = [];
-  recipeItemAdded = new EventEmitter<RecipeIngredient[]>();
+  recipeItemAdded = new Subject<RecipeIngredient[]>();
   itemAlreadyExists: boolean = false;
 
   constructor() {
@@ -42,17 +43,16 @@ export class RecipeIngredientService {
 
   addIngredient(newIngredient: RecipeIngredient) {
     this.itemAlreadyExists = false;
-    debugger
-    console.log(newIngredient);
     for (let i = 0; i < this.recipeItems.length; i++){
       if (this.recipeItems[i].id === newIngredient.id) {
         this.itemAlreadyExists = true;
+        alert("Ingredient already exists");
         break;
       }
     }
     if (!this.itemAlreadyExists) {
       this.recipeItems.push(newIngredient);
     }
-    this.recipeItemAdded.emit(this.recipeItems.slice());
+    this.recipeItemAdded.next(this.recipeItems.slice());
   }
 }
