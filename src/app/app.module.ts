@@ -12,6 +12,12 @@ import { RecipeDetailComponent } from './components/recipe-book/recipe-detail/re
 import { ShoppingEditComponent } from './components/shopping-list/shopping-edit/shopping-edit.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RecipeComponent } from './components/recipe-book/recipe-list/recipe/recipe.component';
+import { AppBackgroundDirective } from './directives/app-background.directive';
+import { appRoutingModule } from './app-routingModule';
+import { FirstcomponentComponent } from './components/firstcomponent/firstcomponent.component';
+import { RecipeEditComponent } from './components/recipe-book/recipe-edit/recipe-edit.component';
+
+
 
 @NgModule({
   declarations: [
@@ -25,9 +31,16 @@ import { RecipeComponent } from './components/recipe-book/recipe-list/recipe/rec
     ShoppingEditComponent,
     FooterComponent,
     RecipeComponent,
+    AppBackgroundDirective,
+    FirstcomponentComponent,
+    RecipeEditComponent,
   ],
-  imports: [BrowserModule, FormsModule],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    appRoutingModule
+  ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

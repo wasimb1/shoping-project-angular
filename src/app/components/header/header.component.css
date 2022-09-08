@@ -1,0 +1,13 @@
+.activeLink{
+    background-color: #1eb380;
+    outline: none;
+    border-radius: 4px;
+    transition: all 0.5s;
+    
+}
+.activeLink:hover {
+    background-color: #1eb380;
+    opacity: 0.9;
+    font-weight: 500;
+    transition: 0s
+}

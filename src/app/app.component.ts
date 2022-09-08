@@ -7,8 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'shoping-project';
-  selPage: string =  'recipe-list';
-  onSelectedPage(page:string) {
-    this.selPage = page;
-  }
 }

@@ -1,16 +1,8 @@
-<div class="row" *ngIf="selectedPage === 'recipe-list'">
+<div class="row">
     <div class="col-sm-6">
         <app-recipe-list></app-recipe-list>
     </div>
     <div class="col-sm-6">
-        <app-recipe-detail [recipe]="selectedRecipe" *ngIf="selectedRecipe; else norecipeBlock"></app-recipe-detail>
-        <ng-template #norecipeBlock>
-           <div class="d-flex justify-content-center align-items-center h-100" >
-                <h1>please select recipe</h1>   
-           </div>
-        </ng-template>
+        <router-outlet></router-outlet>
     </div>
-</div>
-<div class="container-fluid" *ngIf="selectedPage === 'shoping-list'">
-    <app-shopping-list></app-shopping-list>
 </div>

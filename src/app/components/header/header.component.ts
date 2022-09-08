@@ -6,14 +6,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  @Output() slectedPage = new EventEmitter<string>();
-  
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  changePage(page: string) {
-    this.slectedPage.emit(page);
   }
 }

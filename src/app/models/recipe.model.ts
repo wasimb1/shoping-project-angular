@@ -1,7 +1,7 @@
 import { RecipeIngredient } from './recipe-ingredient.model';
 
 export class Recipe {
-  id!: String;
+  id: String;
   name: String;
   description: String;
   imagePath: String;
@@ -18,6 +18,6 @@ export class Recipe {
     this.name = name;
     this.description = description;
     this.imagePath = imagePath;
-    this.recipeItems = recipeItems;
+    this.recipeItems = [...recipeItems];
   }
 }

@@ -7,6 +7,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 export class RecipeIngredientService {
   recipeItems: RecipeIngredient[] = [];
   recipeItemAdded = new EventEmitter<RecipeIngredient[]>();
+  itemAlreadyExists: boolean = false;
 
   constructor() {
     this.recipeItems = [
@@ -14,19 +15,19 @@ export class RecipeIngredientService {
         '01',
         'RecipeItem 01',
         'RecipeItem description first',
-        3
+        1*1
       ),
       new RecipeIngredient(
         '02',
         'RecipeItem 02',
         'RecipeItem description second',
-        4
+        2*2
       ),
       new RecipeIngredient(
         '03',
         'RecipeItem 03',
         'RecipeItem description thrid',
-        8
+        3*3
       ),
     ];
   }
@@ -36,12 +37,22 @@ export class RecipeIngredientService {
   }
 
   getRecipeItems() {
-    return this.recipeItems.slice(0);
+    return this.recipeItems.slice();
   }
 
   addIngredient(newIngredient: RecipeIngredient) {
+    this.itemAlreadyExists = false;
+    debugger
     console.log(newIngredient);
-    this.recipeItems.push(newIngredient);
+    for (let i = 0; i < this.recipeItems.length; i++){
+      if (this.recipeItems[i].id === newIngredient.id) {
+        this.itemAlreadyExists = true;
+        break;
+      }
+    }
+    if (!this.itemAlreadyExists) {
+      this.recipeItems.push(newIngredient);
+    }
     this.recipeItemAdded.emit(this.recipeItems.slice());
   }
 }

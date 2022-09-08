@@ -9,13 +9,10 @@ import { RecipeIngredientService } from './recipe-list/recipe/recipe-ingredient/
 export class RecipeBookService {
   selectedRecipe = new EventEmitter<Recipe>();
   recipes: Recipe[] = [];
-
-  constructor(private RecipeIngredientService: RecipeIngredientService) {}
-
-  getRecipes() {
+  constructor(private RecipeIngredientService: RecipeIngredientService) {
     this.recipes = [
       new Recipe(
-        '01',
+        '1',
         'Recipe 01',
         'This is first recipe.',
         'https://thumbs.dreamstime.com/z/home-cooking-logo-yellow-background-eps-home-cooking-logo-yellow-background-193149392.jpg',
@@ -26,7 +23,7 @@ export class RecipeBookService {
         ]
       ),
       new Recipe(
-        '02',
+        '2',
         'Recipe 02',
         'This is Second recipe.',
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj2BvNtjmNPge_0hUtLsKvq1jR8ElNzkaAzw&usqp=CAU',
@@ -37,7 +34,7 @@ export class RecipeBookService {
         ]
       ),
       new Recipe(
-        '03',
+        '3',
         'Recipe 03',
         'This is third recipe.',
         'https://thumbs.dreamstime.com/z/home-cooking-logo-yellow-background-eps-home-cooking-logo-yellow-background-193149392.jpg',
@@ -48,7 +45,7 @@ export class RecipeBookService {
         ]
       ),
       new Recipe(
-        '04',
+        '4',
         'Recipe 04',
         'This is fourth recipe.',
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj2BvNtjmNPge_0hUtLsKvq1jR8ElNzkaAzw&usqp=CAU',
@@ -57,17 +54,24 @@ export class RecipeBookService {
             '04',
             'Ingredient 04',
             'Recipe Ingredient fourth.',
-            27
+            4*4
           ),
           new RecipeIngredient(
             '05',
-            'Ingredient 04',
-            'Recipe Ingredient fourth.',
-            27
+            'Ingredient 05',
+            'Recipe Ingredient Fifth.',
+            5*5
           ),
         ]
       ),
     ];
-    return this.recipes;
+  }
+
+  getRecipes() {
+    return this.recipes.slice();
+  }
+  
+  getRecipe(id: string) {
+    return this.recipes.filter(recipe => recipe.id === id);
   }
 }

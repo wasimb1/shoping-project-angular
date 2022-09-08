@@ -20,3 +20,7 @@
 .card.recipe .card-body .stretched-link {
     cursor: pointer;
 }
+
+.active {
+    background-color: #1eb380;
+}
