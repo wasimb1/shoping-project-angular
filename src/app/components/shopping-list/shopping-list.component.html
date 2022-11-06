@@ -5,12 +5,22 @@
 
   <div class="col-sm-6 my-2">
     <ol class="list-group list-group-numbered">
-      <li class="list-group-item d-flex justify-content-between align-items-start" *ngFor="let item of ingredients">
+      <li
+        class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
+        [ngClass]="{active: item.active}"
+        *ngFor="let item of ingredients"
+        >
         <div class="ms-2 me-auto">
-          <div class="fw-bold">{{item.name}}</div>
+          <div class="fw-bold d-flex align-items-center">{{item.name}}
+            <span class="badge bg-primary rounded-pill ms-2">{{item.amount}}</span>
+          </div>
           <p>{{item.description}}</p>
         </div>
-        <span class="badge bg-primary rounded-pill">{{item.amount}}</span>
+        
+        <div class="shopingActions">
+          <span class="pe-2" (click)="editItem(item)"> <i class="fa fa-regular fa-file-pen"></i></span>
+          <span class="pe-2" (click)="deleteItem(item)"> <i class="fa fa-sharp fa-solid fa-trash"></i></span>
+        </div>
       </li>
     </ol>
   </div>

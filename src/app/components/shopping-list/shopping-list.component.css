@@ -1,0 +1,11 @@
+ .list-group-item .shopingActions .fa{
+  cursor: pointer;
+ }
+
+ .list-group-item .shopingActions .fa.fa-file-pen{
+  color: #eb8301;
+ }
+
+ .list-group-item .shopingActions .fa.fa-trash{
+  color: #cd2727;
+ }

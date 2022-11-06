@@ -8,3 +8,6 @@ body {
     height: 100vh;
     background-color: #fdfffc;
 }
+form{
+  border: none !important;
+}
