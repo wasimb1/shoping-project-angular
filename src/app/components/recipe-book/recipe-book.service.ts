@@ -53,13 +53,15 @@ export class RecipeBookService {
             '04',
             'Ingredient 04',
             'Recipe Ingredient fourth.',
-            4*4
+            4 * 4,
+            0
           ),
           new RecipeIngredient(
             '05',
             'Ingredient 05',
             'Recipe Ingredient Fifth.',
-            5*5
+            5 * 5,
+            0
           ),
         ]
       ),

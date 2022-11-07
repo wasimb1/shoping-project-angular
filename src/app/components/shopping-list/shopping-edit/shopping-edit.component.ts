@@ -15,7 +15,7 @@ export class ShoppingEditComponent implements OnInit {
   clearFormJson;
   igSub: Subscription;
   isEdit: boolean = false;
-  editItem: any;
+  editItem: any = null;
 
   constructor(
     private recipeIngredientService: RecipeIngredientService,
@@ -34,11 +34,11 @@ export class ShoppingEditComponent implements OnInit {
     this.igSub = this.recipeIngredientService.recipeItemEditIndex.subscribe(
       (obj: {item:any})=> {
         if (obj.item.id !== null && obj.item.id !== undefined) {
-          this.isEdit = true;
           // let editItemExists = this.recipeIngredientService.getRecipeItem(obj.id);
           console.log(obj);
           this.editItem = obj.item;
-          if(obj.item.isEdit){
+          if (obj.item.isEdit) {
+            this.isEdit = true;
             if (obj !== null && obj.item.id !== undefined) {
               this.shoppingListForm.patchValue({
                 id: obj.item.id,
@@ -49,7 +49,8 @@ export class ShoppingEditComponent implements OnInit {
               this.shoppingListForm.controls['name'].disable();
             }
           }
-          else if (obj.item.isDelete){
+          else if (obj.item.isDeleted) {
+            this.isEdit = false;
             if (obj !== null && obj.item.id !== undefined) {
               this.recipeIngredientService.deleteIngredient(obj.item.id);
               this.clearForm();
@@ -68,6 +69,7 @@ export class ShoppingEditComponent implements OnInit {
           this.shoppingListForm.controls['name'].value,
           this.shoppingListForm.controls['description'].value,
           this.shoppingListForm.controls['amount'].value,
+          0
         );
         addedIngredient = this.recipeIngredientService.addIngredient(newRecipeIngredient);
         if (addedIngredient)
@@ -91,7 +93,7 @@ export class ShoppingEditComponent implements OnInit {
     if (this.editItem !== undefined && this.editItem !== null) {
       this.editItem.active = false;
       this.editItem.isEdit = false;
-      this.editItem.isDelete = false;
+      this.editItem.isDeleted = 0;
     }
     
   }

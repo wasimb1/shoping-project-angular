@@ -1,7 +1,6 @@
 import { RecipeIngredient } from '../../../../../models/recipe-ingredient.model';
 import { Injectable, EventEmitter } from '@angular/core';
 import { Subject } from 'rxjs';
-import {stringify} from "@angular/compiler/src/util";
 
 @Injectable({
   providedIn: 'root',
@@ -19,19 +18,22 @@ export class RecipeIngredientService {
         '01',
         'RecipeItem 01',
         'RecipeItem description first',
-        1*1
+        1 * 1,
+        0
       ),
       new RecipeIngredient(
         '02',
         'RecipeItem 02',
         'RecipeItem description second',
-        2*2
+        2 * 2,
+        0
       ),
       new RecipeIngredient(
         '03',
         'RecipeItem 03',
         'RecipeItem description thrid',
-        3*3
+        3 * 3,
+        0
       ),
     ];
   }
@@ -41,7 +43,7 @@ export class RecipeIngredientService {
   }
 
   getRecipeItems() {
-    return this.recipeItems.slice();
+    return this.recipeItems;
   }
 
   addIngredient(newIngredient: RecipeIngredient):boolean {
@@ -56,7 +58,7 @@ export class RecipeIngredientService {
     if (!this.itemAlreadyExists) {
       this.recipeItems.push(newIngredient);
     }
-    this.recipeItemsUpadte.next(this.recipeItems.slice());
+    this.recipeItemsUpadte.next(this.recipeItems);
     return !this.itemAlreadyExists;
   }
 
@@ -76,10 +78,9 @@ export class RecipeIngredientService {
     if(editItemExists !== undefined && editItemExists !== null){
       let index = this.recipeItems.map(item => item.id).indexOf(editItemExists.id);
       this.recipeItems.splice(index, 1);
-      this.recipeItemsUpadte.next(this.recipeItems.slice());
+      this.recipeItemsUpadte.next(this.recipeItems);
     }
   }
-
 }
 
 
