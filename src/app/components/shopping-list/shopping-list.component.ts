@@ -1,6 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { retryWhen } from 'rxjs-compat/operator/retryWhen';
 import { RecipeIngredient } from 'src/app/models/recipe-ingredient.model';
 import { RecipeIngredientService } from '../recipe-book/recipe-list/recipe/recipe-ingredient/recipe-ingredient.service';
 @Component({
