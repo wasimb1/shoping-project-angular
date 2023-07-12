@@ -8,7 +8,7 @@ import { RecipeIngredientService } from '../recipe-list/recipe/recipe-ingredient
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
-  styleUrls: ['./recipe-detail.component.css'],
+  styleUrls: ['./recipe-detail.component.scss'],
 })
 export class RecipeDetailComponent implements OnInit {
   recipe: Recipe;
@@ -26,7 +26,7 @@ export class RecipeDetailComponent implements OnInit {
       (params: Params) => {
         this.recipeId = params['id'];
           rc = this.recipeListService.getRecipe(this.recipeId);
-        if (rc !== undefined && rc !== null)
+        if (rc)
           this.recipe = rc[0];
         else {
           rc = this.recipeListService.getRecipe('1');

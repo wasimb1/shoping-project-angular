@@ -18,15 +18,18 @@
                               [formControlName]="'amount'" [id]="'amount'" type="number" class="form-control"
                               aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
+                        <span *ngIf="shoppingListForm.get('amount').hasError('pattern')" class="errorMsg">
+                          Amount must be greater than 0
+                        </span>
                     </div>
-                    <div class="col">
+                    <div class="col pt-1">
                         <textarea [formControlName]="'description'" [id]="'description'" type="text" class="form-control" aria-label="Sizing example input"
                            placeholder="Description" aria-describedby="inputGroup-sizing-default" ></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
-                        <button class="btn btn-success btn-sm mx-1 px-3" type="submit" >{{!isEdit ? 'Add' : 'Update'}}</button>
+                        <button class="btn btn-success btn-sm mx-1 px-3" type="submit" [disabled]="!shoppingListForm.valid">{{!isEdit ? 'Add' : 'Update'}}</button>
                         <button class="btn btn-warning btn-sm mx-1 px-3" type="button" (click)="clearForm()">Clear</button>
                     </div>
                 </div>

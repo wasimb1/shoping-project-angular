@@ -5,7 +5,7 @@ import { RecipeIngredientService } from '../recipe-book/recipe-list/recipe/recip
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css'],
+  styleUrls: ['./shopping-list.component.scss'],
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: any[] = [];
@@ -33,28 +33,23 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       if (item.id === ig.id) {
         item.active = true;
         ig.active = true;
-        ig.editMode = true;
       }
       else {
         ig.active = false;
-        ig.editMode = false;
       }
     })
     debugger
-    item.isEdit = true;
     item.isDeleted = 0;
-    this.recipeIngredientService.recipeItemEditIndex.next({ item});
+    this.recipeIngredientService.recipeItemEditIndex.next(item.id);
   }
 
   deleteItem(item: any, i: number) {
     console.log("delete item", item);
-    if (item.editMode) {
+    if (item.active) {
       alert("Item taken for edit cannot be deleted. clear the item from edit first.");
       return;
     }
-    item.editMode = true;
-    item.isEdit = false;
-    item.isDelete = 1;
+    item.dto = 1;
     // this.recipeIngredientService.recipeItemEditIndex.next({item});
     this.ingredients.splice(i, 1);
   }
@@ -64,8 +59,6 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     this.ingredients.forEach(igItem => {
       igItem.active = false;
       igItem.isDeleted = 0;
-      igItem.editMode = false;
-      igItem.isEdit = false;
     });
   }
 }

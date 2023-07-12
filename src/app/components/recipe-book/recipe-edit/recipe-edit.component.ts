@@ -4,7 +4,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'app-recipe-edit',
   templateUrl: './recipe-edit.component.html',
-  styleUrls: ['./recipe-edit.component.css']
+  styleUrls: ['./recipe-edit.component.scss']
 })
 export class RecipeEditComponent implements OnInit {
   recipeId: string;
@@ -18,6 +18,7 @@ export class RecipeEditComponent implements OnInit {
       (params: Params) => {
         this.recipeId = params['id'];
         this.isEditMode = (params['id'] !== undefined && params['id'] !== null);
+        console.log("IsEditMode: ", this.isEditMode);
       }
     )
   }

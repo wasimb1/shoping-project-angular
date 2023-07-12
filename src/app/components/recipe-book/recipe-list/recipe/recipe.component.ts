@@ -6,7 +6,7 @@ import { RecipeBookService } from '../../recipe-book.service';
 @Component({
   selector: 'app-recipe',
   templateUrl: './recipe.component.html',
-  styleUrls: ['./recipe.component.css'],
+  styleUrls: ['./recipe.component.scss'],
 })
 export class RecipeComponent implements OnInit {
   @Input() recipe!: Recipe;
@@ -23,4 +23,3 @@ export class RecipeComponent implements OnInit {
     this.router.navigate([rc.id], { relativeTo: this.activatedRoute });
   }
 }
-  

@@ -8,8 +8,7 @@ import { Subject } from 'rxjs';
 export class RecipeIngredientService {
   recipeItems: RecipeIngredient[] = [];
   recipeItemsUpadte = new Subject<RecipeIngredient[]>();
-  // recipeItemEditIndex = new Subject<{id:string, isEdit: boolean, isDelete: boolean}>();
-  recipeItemEditIndex = new Subject<{item:any}>();
+  recipeItemEditIndex = new Subject<string>();
   itemAlreadyExists: boolean = false;
 
   constructor() {

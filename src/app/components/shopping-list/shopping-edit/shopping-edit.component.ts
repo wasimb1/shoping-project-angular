@@ -7,7 +7,7 @@ import {Subscription} from "rxjs";
 @Component({
   selector: 'app-shopping-edit',
   templateUrl: './shopping-edit.component.html',
-  styleUrls: ['./shopping-edit.component.css'],
+  styleUrls: ['./shopping-edit.component.scss'],
 })
 export class ShoppingEditComponent implements OnInit {
 
@@ -23,8 +23,8 @@ export class ShoppingEditComponent implements OnInit {
   ) {
     this.shoppingListForm = this.fb.group({
       id: [''],
-      name: ['', Validators.required],
-      amount: [null, Validators.required],
+      name: ['', [Validators.required, Validators.pattern("[A-Za-z][A-Za-z0-9 ]*")]],
+      amount: [null, [Validators.required, Validators.pattern("^[1-9][0-9]*$")]],
       description: ['', Validators.required]
     });
     this.clearFormJson = this.shoppingListForm.value;
@@ -32,27 +32,26 @@ export class ShoppingEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.igSub = this.recipeIngredientService.recipeItemEditIndex.subscribe(
-      (obj: {item:any})=> {
-        if (obj.item.id !== null && obj.item.id !== undefined) {
-          // let editItemExists = this.recipeIngredientService.getRecipeItem(obj.id);
-          console.log(obj);
-          this.editItem = obj.item;
-          if (obj.item.isEdit) {
+      (itemId: string) => {
+        debugger
+        if (itemId) {
+          let editItemExists = this.recipeIngredientService.getRecipeItem(itemId);
+          console.log(editItemExists);
+          if (editItemExists) {
+            this.editItem =editItemExists;
             this.isEdit = true;
-            if (obj !== null && obj.item.id !== undefined) {
-              this.shoppingListForm.patchValue({
-                id: obj.item.id,
-                name: obj.item.name,
-                amount: obj.item.amount,
-                description: obj.item.description
-              });
-              this.shoppingListForm.controls['name'].disable();
-            }
+            this.shoppingListForm.patchValue({
+              id: editItemExists.id,
+              name: editItemExists.name,
+              amount: editItemExists.amount,
+              description: editItemExists.description
+            });
+            this.shoppingListForm.controls['name'].disable();
           }
-          else if (obj.item.isDeleted) {
+          else if (editItemExists.dto == 0) {
             this.isEdit = false;
-            if (obj !== null && obj.item.id !== undefined) {
-              this.recipeIngredientService.deleteIngredient(obj.item.id);
+            if (editItemExists) {
+              this.recipeIngredientService.deleteIngredient(editItemExists.id);
               this.clearForm();
             }
           }
@@ -92,9 +91,8 @@ export class ShoppingEditComponent implements OnInit {
     this.shoppingListForm.controls['name'].enable();
     if (this.editItem !== undefined && this.editItem !== null) {
       this.editItem.active = false;
-      this.editItem.isEdit = false;
       this.editItem.isDeleted = 0;
     }
-    
+
   }
 }

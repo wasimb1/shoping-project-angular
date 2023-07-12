@@ -1,0 +1,11 @@
+.ng-dirty.ng-invalid{
+    border: solid 1px #ee5959;
+}
+
+.errorMsg{
+  color: red;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0 8px;
+  position: absolute;
+}
