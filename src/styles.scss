@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
 * {
     padding: 0;
     margin: 0;
@@ -10,4 +11,13 @@ body {
 }
 form{
   border: none !important;
+}
+
+.ellipsis{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.overflowHidden{
+  overflow: hidden;
 }

@@ -91,7 +91,7 @@ export class ShoppingEditComponent implements OnInit {
     this.shoppingListForm.controls['name'].enable();
     if (this.editItem !== undefined && this.editItem !== null) {
       this.editItem.active = false;
-      this.editItem.isDeleted = 0;
+      this.editItem.dto = 0;
     }
 
   }

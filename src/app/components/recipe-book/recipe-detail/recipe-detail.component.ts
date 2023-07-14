@@ -27,10 +27,10 @@ export class RecipeDetailComponent implements OnInit {
         this.recipeId = params['id'];
           rc = this.recipeListService.getRecipe(this.recipeId);
         if (rc)
-          this.recipe = rc[0];
+          this.recipe = rc;
         else {
           rc = this.recipeListService.getRecipe('1');
-          this.recipe = rc[0];
+          this.recipe = rc;
         }
       }
     );

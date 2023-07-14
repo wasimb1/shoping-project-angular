@@ -7,7 +7,8 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
-          "strict": true
+          "strict": true,
+          "style": "scss"
         }
       },
       "root": "",
@@ -28,7 +29,7 @@
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.css",
-              "src/styles.css",
+              "src/styles.scss",
               "./node_modules/@fortawesome/fontawesome-free/css/fontawesome.css",
               "./node_modules/@fortawesome/fontawesome-free/css/brands.css",
               "./node_modules/@fortawesome/fontawesome-free/css/solid.css"
@@ -100,7 +101,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }

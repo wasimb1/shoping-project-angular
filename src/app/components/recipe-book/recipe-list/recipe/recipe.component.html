@@ -1,14 +1,14 @@
 <div  class="card recipe" routerLinkActive="active">
     <img [src]="recipe.imagePath" class="img-fluid recipe-images" alt="..." />
-    <div class="card-body">
-        <h5 class="card-title">{{ recipe.name }}</h5>
-        <p class="card-text mb-1">{{ recipe.description }}</p>
+    <div class="card-body overflowHidden">
+        <h5 class="card-title ellipsis">{{ recipe.name }}</h5>
+        <p class="card-text mb-1 ellipsis" title="{{ recipe.description }}">{{ recipe.description }}</p>
         <p class="card-text mb-1">
             <small class="text-muted">Last updated 3 mins ago</small>
         </p>
-        <a 
-            [routerLink]="[recipe.id]" 
-            routerLinkActive="active"  
+        <a
+            [routerLink]="[recipe.id]"
+            routerLinkActive="active"
             class="stretched-link"></a>
     </div>
 </div>

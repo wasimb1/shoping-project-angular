@@ -1,17 +1,17 @@
 import { RecipeIngredient } from './recipe-ingredient.model';
 
 export class Recipe {
-  id: String;
-  name: String;
-  description: String;
-  imagePath: String;
+  id: string;
+  name: string;
+  description: string;
+  imagePath: string;
   recipeItems: RecipeIngredient[];
 
   constructor(
     id: string,
-    name: String,
-    description: String,
-    imagePath: String,
+    name: string,
+    description: string,
+    imagePath: string,
     recipeItems: RecipeIngredient[]
   ) {
     this.id = id;

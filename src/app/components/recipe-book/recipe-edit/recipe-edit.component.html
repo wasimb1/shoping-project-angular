@@ -1,1 +1,36 @@
-<p>recipe-edit works!</p>
+<div class="row py-3">
+  <div class="col-sm-12">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSaveData()">
+      <fieldset>
+        <div class="row">
+          <div class="col-xs-12 text-end">
+              <button class="btn btn-success btn-sm mx-1 px-3" type="submit" [disabled]="!recipeForm.valid">{{!isEditMode ? 'Add' : 'Update'}}</button>
+              <button class="btn btn-danger btn-sm mx-1 px-3" type="button" (click)="clearForm()">Cancel</button>
+          </div>
+      </div>
+        <div class="row py-2">
+            <div class="col-sm-6 mb-3">
+                <div class="input-group">
+                    <span class="input-group-text" id="ingName">Name</span>
+                    <input
+                      [formControlName]="'name'" [id]="'name'" type="text" class="form-control"
+                      aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <label for="imagePath" class="input-group-text" id="ingAmount">Image Path</label>
+                    <input
+                      [formControlName]="'imagePath'" [id]="'imagePath'" type="text" class="form-control"
+                      aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                </div>
+            </div>
+            <div class="col">
+                <textarea [formControlName]="'description'" [id]="'description'" type="text" class="form-control" aria-label="Sizing example input"
+                   placeholder="Description" aria-describedby="inputGroup-sizing-default" ></textarea>
+            </div>
+        </div>
+    </fieldset>
+    </form>
+  </div>
+</div>

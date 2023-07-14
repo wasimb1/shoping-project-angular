@@ -38,8 +38,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
         ig.active = false;
       }
     })
-    debugger
-    item.isDeleted = 0;
+    item.dto = 0;
     this.recipeIngredientService.recipeItemEditIndex.next(item.id);
   }
 
@@ -58,7 +57,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     this.igSub.unsubscribe();
     this.ingredients.forEach(igItem => {
       igItem.active = false;
-      igItem.isDeleted = 0;
+      igItem.dto = 0;
     });
   }
 }
