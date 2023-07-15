@@ -12,22 +12,22 @@
             <div class="col-sm-6 mb-3">
                 <div class="input-group">
                     <span class="input-group-text" id="ingName">Name</span>
-                    <input
+                    <input autocomplete="on"
                       [formControlName]="'name'" [id]="'name'" type="text" class="form-control"
                       aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="input-group">
-                    <label for="imagePath" class="input-group-text" id="ingAmount">Image Path</label>
-                    <input
+                    <span for="imagePath" class="input-group-text" id="ingAmount">Image Path</span>
+                    <input autocomplete="on"
                       [formControlName]="'imagePath'" [id]="'imagePath'" type="text" class="form-control"
                       aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                 </div>
             </div>
             <div class="col">
                 <textarea [formControlName]="'description'" [id]="'description'" type="text" class="form-control" aria-label="Sizing example input"
-                   placeholder="Description" aria-describedby="inputGroup-sizing-default" ></textarea>
+                   placeholder="Description" aria-describedby="inputGroup-sizing-default" autocomplete="on"></textarea>
             </div>
         </div>
     </fieldset>

@@ -86,6 +86,7 @@ export class RecipeEditComponent implements OnInit {
     }
     else {
       this.recipeBookService.AddRecipe(savedRecipe);
+      this.clearForm();
     }
   }
 
