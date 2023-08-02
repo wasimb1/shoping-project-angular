@@ -6,78 +6,99 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class RecipeIngredientService {
-  recipeItems: RecipeIngredient[] = [];
+  recipeIngredients: RecipeIngredient[] = [];
   recipeItemsUpadte = new Subject<RecipeIngredient[]>();
   recipeItemEditIndex = new Subject<string>();
   itemAlreadyExists: boolean = false;
 
   constructor() {
-    this.recipeItems = [
+    this.recipeIngredients = [
       new RecipeIngredient(
-        '01',
+        '1',
         'RecipeItem 01',
         'RecipeItem description first',
-        1 * 1,
-        0
+        1 * 1, 50, 0
       ),
       new RecipeIngredient(
-        '02',
+        '2',
         'RecipeItem 02',
         'RecipeItem description second',
-        2 * 2,
-        0
+        2 * 2, 40, 0
       ),
       new RecipeIngredient(
-        '03',
+        '3',
         'RecipeItem 03',
         'RecipeItem description thrid',
-        3 * 3,
-        0
+        3 * 3, 60, 0
       ),
+      new RecipeIngredient(
+        '4',
+        'Ingredient 04',
+        'Recipe Ingredient fourth.',
+        4 * 4, 30, 0
+      ),
+      new RecipeIngredient(
+        '5',
+        'Ingredient 05',
+        'Recipe Ingredient Fifth.',
+        5 * 5, 70, 0
+      )
     ];
   }
 
   getRecipeItem(id: string) {
-    return this.recipeItems.find((recipeItem) => recipeItem.id === id);
+    return this.recipeIngredients.find((recipeItem) => recipeItem.id === id);
   }
+
+  getRecipeItembyName(name: string):RecipeIngredient[] {
+    return this.recipeIngredients.filter((recipeItem) => recipeItem.name.toLowerCase().includes(name.toLowerCase()));
+  }
+
 
   getRecipeItems() {
-    return this.recipeItems;
+    return this.recipeIngredients;
   }
 
-  addIngredient(newIngredient: RecipeIngredient):boolean {
+  addIngredient(newIngredient: RecipeIngredient): boolean {
+    let newRecipeIngredient: RecipeIngredient = new RecipeIngredient(
+      (this.getRecipeItems().length + 1).toString(),
+      newIngredient.name,
+      newIngredient.description,
+      newIngredient.amount,
+      newIngredient.quantity,
+      0
+    );
     this.itemAlreadyExists = false;
-    for (let i = 0; i < this.recipeItems.length; i++){
-      if (this.recipeItems[i].id === newIngredient.id || this.recipeItems[i].name === newIngredient.name) {
+    this.recipeIngredients.forEach(recipeIngredient => {
+      if (recipeIngredient.id === newIngredient.id || recipeIngredient.name == newIngredient.name) {
         this.itemAlreadyExists = true;
-        alert("Ingredient already exists");
-        break;
+        recipeIngredient.quantity++;
       }
-    }
+    });
     if (!this.itemAlreadyExists) {
-      this.recipeItems.push(newIngredient);
+      this.recipeIngredients.push(newRecipeIngredient);
     }
-    this.recipeItemsUpadte.next(this.recipeItems);
+    this.recipeItemsUpadte.next(this.recipeIngredients);
     return !this.itemAlreadyExists;
   }
 
   updateIngredient(editItem: RecipeIngredient){
     let editItemExists = this.getRecipeItem(editItem.id);
-    if(editItemExists !== undefined && editItemExists !== null){
+    if(editItemExists){
       editItemExists.name = editItem.name;
-      editItemExists.amount = editItem.amount;
+      editItemExists.quantity = editItem.quantity;
       editItemExists.description = editItem.description;
-      let index = this.recipeItems.map(item => item.id).indexOf(editItemExists.id);
-      this.recipeItems.splice(index, 1, editItemExists);
+      let index = this.recipeIngredients.map(item => item.id).indexOf(editItemExists.id);
+      this.recipeIngredients.splice(index, 1, editItemExists);
     }
   }
 
   deleteIngredient(id: string){
     let editItemExists = this.getRecipeItem(id);
-    if(editItemExists !== undefined && editItemExists !== null){
-      let index = this.recipeItems.map(item => item.id).indexOf(editItemExists.id);
-      this.recipeItems.splice(index, 1);
-      this.recipeItemsUpadte.next(this.recipeItems);
+    if(editItemExists){
+      let index = this.recipeIngredients.map(item => item.id).indexOf(editItemExists.id);
+      this.recipeIngredients.splice(index, 1);
+      this.recipeItemsUpadte.next(this.recipeIngredients);
     }
   }
 }

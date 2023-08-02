@@ -19,8 +19,8 @@ export class RecipeBookService {
         'https://thumbs.dreamstime.com/z/home-cooking-logo-yellow-background-eps-home-cooking-logo-yellow-background-193149392.jpg',
         [
           ...this.RecipeIngredientService.getRecipeItems().filter(
-            (ri) => ri.id === '01' || ri.id === '02'
-          ),
+            (ri) => ri.id === '1' || ri.id === '2'
+          )
         ]
       ),
       new Recipe(
@@ -30,8 +30,8 @@ export class RecipeBookService {
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj2BvNtjmNPge_0hUtLsKvq1jR8ElNzkaAzw&usqp=CAU',
         [
           ...this.RecipeIngredientService.getRecipeItems().filter(
-            (ri) => ri.id === '01' || ri.id === '03'
-          ),
+            (ri) => ri.id === '1' || ri.id === '3'
+          )
         ]
       ),
       new Recipe(
@@ -41,8 +41,8 @@ export class RecipeBookService {
         'https://thumbs.dreamstime.com/z/home-cooking-logo-yellow-background-eps-home-cooking-logo-yellow-background-193149392.jpg',
         [
           ...this.RecipeIngredientService.getRecipeItems().filter(
-            (ri) => ri.id === '03' || ri.id === '02'
-          ),
+            (ri) => ri.id === '3' || ri.id === '2'
+          )
         ]
       ),
       new Recipe(
@@ -51,20 +51,9 @@ export class RecipeBookService {
         'This is fourth recipe.',
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj2BvNtjmNPge_0hUtLsKvq1jR8ElNzkaAzw&usqp=CAU',
         [
-          new RecipeIngredient(
-            '04',
-            'Ingredient 04',
-            'Recipe Ingredient fourth.',
-            4 * 4,
-            0
-          ),
-          new RecipeIngredient(
-            '05',
-            'Ingredient 05',
-            'Recipe Ingredient Fifth.',
-            5 * 5,
-            0
-          ),
+          ...this.RecipeIngredientService.getRecipeItems().filter(
+            (ri) => ri.id === '4' || ri.id === '5'
+          )
         ]
       ),
     ];
@@ -78,18 +67,56 @@ export class RecipeBookService {
     return this.recipes.find(recipe => recipe.id === id);
   }
 
-  AddRecipe(recipe: Recipe) {
-    recipe.id = (this.recipes.length + 1).toString();
-    this.recipes.push(recipe);
-    this.recipesUpdated.next(this.recipes);
+  AddRecipe(recipe: Recipe): boolean {
+    let recipeItemExist = this.recipes.find(rc => rc.id === recipe.id || rc.name.toLowerCase() === recipe.name.toLowerCase());
+    if (!recipeItemExist) {
+      recipe.id = (this.recipes.length + 1).toString();
+      this.recipes.push(recipe);
+      recipe.recipeItems.forEach(item => {
+        this.RecipeIngredientService.addIngredient(item);
+      });
+      this.recipesUpdated.next(this.recipes);
+      return true;
+    }
+    else {
+      alert("Recipe already Exists");
+      return false;
+    }
   }
 
   updateRecipe(recipe: Recipe): number {
     const index: number = this.recipes.findIndex(rec => rec.id== recipe.id);
     if (index > -1) {
-      this.recipes[index] = recipe;
+      this.recipes[index].id = recipe.id;
+      this.recipes[index].name = recipe.name;
+      this.recipes[index].description = recipe.description;
+      this.recipes[index].imagePath = recipe.imagePath;
+      this.recipes[index].recipeItems.forEach((rcItem,i) => {
+        if (rcItem.id == recipe.recipeItems[i].id) {
+          rcItem.quantity = recipe.recipeItems[i].quantity;
+        }
+      });
+      recipe.recipeItems.forEach(item => {
+        this.RecipeIngredientService.updateIngredient(item);
+      });
       this.recipesUpdated.next(this.recipes);
     }
     return index;
+  }
+
+  deleteRecipe(recipe: Recipe) {
+    const index: number = this.recipes.findIndex(rec => rec.id == recipe.id);
+    if (index >= 0) {
+      this.recipes.splice(index, 1);
+      recipe.recipeItems.forEach(item => {
+        let recipeItemExistsInOtherRecipes = this.recipes.find(rc => rc.id != recipe.id && rc.recipeItems.find(rcIng => rcIng.id == item.id));
+        if(!recipeItemExistsInOtherRecipes)
+          this.RecipeIngredientService.deleteIngredient(item.id);
+      });
+    }
+    this.recipesUpdated.next(this.recipes);
+  }
+  async checkRecipeItemExistsInOtherRecipes(recipe: Recipe) {
+
   }
 }

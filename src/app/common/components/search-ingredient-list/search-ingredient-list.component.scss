@@ -1,0 +1,22 @@
+.list-container{
+  position: relative;
+}
+.list-group{
+  position: absolute !important;
+  width: -webkit-fill-available;
+  z-index: 999;
+  padding-top: 4px;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}

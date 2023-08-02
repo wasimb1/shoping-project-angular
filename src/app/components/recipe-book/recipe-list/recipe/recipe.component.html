@@ -7,6 +7,7 @@
             <small class="text-muted">Last updated 3 mins ago</small>
         </p>
         <a
+            title="{{ recipe.description }}"
             [routerLink]="[recipe.id]"
             routerLinkActive="active"
             class="stretched-link"></a>

@@ -13,13 +13,13 @@
                     </div>
                     <div class="col-sm-5">
                         <div class="input-group">
-                            <span class="input-group-text" id="ingAmount">Amount</span>
+                            <span class="input-group-text" id="ingAmount">Quantity</span>
                             <input
-                              [formControlName]="'amount'" [id]="'amount'" type="number" class="form-control"
+                              [formControlName]="'quantity'" [id]="'quantity'" type="number" class="form-control"
                               aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
-                        <span *ngIf="shoppingListForm.get('amount').hasError('pattern')" class="errorMsg">
-                          Amount must be greater than 0
+                        <span *ngIf="shoppingListForm.get('quantity').hasError('pattern')" class="errorMsg">
+                          Quantity must be greater than 0
                         </span>
                     </div>
                     <div class="col pt-1">

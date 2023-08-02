@@ -17,32 +17,36 @@ import { AppBackgroundDirective } from './directives/app-background.directive';
 import { appRoutingModule } from './app-routingModule';
 import { FirstcomponentComponent } from './components/firstcomponent/firstcomponent.component';
 import { RecipeEditComponent } from './components/recipe-book/recipe-edit/recipe-edit.component';
+import { ClickOutsideDirective } from './directives/click-outside.directive';
+import { SearchIngredientListComponent } from './common/components/search-ingredient-list/search-ingredient-list.component';
 
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    ShoppingListComponent,
-    RecipeBookComponent,
-    RecipeListComponent,
-    RecipeIngredientComponent,
-    RecipeDetailComponent,
-    ShoppingEditComponent,
-    FooterComponent,
-    RecipeComponent,
-    AppBackgroundDirective,
-    FirstcomponentComponent,
-    RecipeEditComponent,
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    appRoutingModule,
-    ReactiveFormsModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        ShoppingListComponent,
+        RecipeBookComponent,
+        RecipeListComponent,
+        RecipeIngredientComponent,
+        RecipeDetailComponent,
+        ShoppingEditComponent,
+        FooterComponent,
+        RecipeComponent,
+        AppBackgroundDirective,
+        FirstcomponentComponent,
+        RecipeEditComponent,
+      ClickOutsideDirective,
+      SearchIngredientListComponent
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        appRoutingModule,
+        ReactiveFormsModule
+    ]
 })
 export class AppModule {}

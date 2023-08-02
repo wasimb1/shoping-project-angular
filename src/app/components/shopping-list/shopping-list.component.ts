@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RecipeIngredient } from 'src/app/models/recipe-ingredient.model';
 import { RecipeIngredientService } from '../recipe-book/recipe-list/recipe/recipe-ingredient/recipe-ingredient.service';
+import { ShopingListItem } from 'src/app/models/shoppinList.model';
+import { ShoppingListService } from './shopping-list.service';
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
@@ -10,26 +12,52 @@ import { RecipeIngredientService } from '../recipe-book/recipe-list/recipe/recip
 export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: any[] = [];
   igSub: Subscription;
+  shoppingList: ShopingListItem[] = [];
 
-  constructor(private recipeIngredientService: RecipeIngredientService) {
-    this.igSub = this.recipeIngredientService.recipeItemsUpadte.subscribe(
+  constructor(
+    private recipeIngredientService: RecipeIngredientService,
+    private shoppingListService: ShoppingListService
+  ) {
+    // this.igSub = this.recipeIngredientService.recipeItemsUpadte.subscribe(
+    //   (newIngredientList) => {
+    //     this.ingredients = newIngredientList;
+    //     this.ingredients.forEach(igItem => {
+    //       igItem.active = false;
+    //     });
+    //   }
+    // );
+    this.igSub = this.shoppingListService.shoppingListUpdated.subscribe(
       (newIngredientList) => {
-        this.ingredients = newIngredientList;
-        this.ingredients.forEach(igItem => {
+        this.shoppingList = newIngredientList;
+        this.shoppingList.forEach(igItem => {
           igItem.active = false;
         });
       }
     );
   }
   ngOnInit(): void {
-    this.ingredients = this.recipeIngredientService.getRecipeItems();
-    this.ingredients.forEach(igItem => {
+    // this.ingredients = this.recipeIngredientService.getRecipeItems();
+    this.shoppingList = this.shoppingListService.getAllShoppingListItems();
+    // this.ingredients.forEach(igItem => {
+    //   igItem.active = false;
+    // });
+    this.shoppingList.forEach(igItem => {
       igItem.active = false;
     });
   }
 
-  editItem(item: any, i: number) {
-    this.ingredients.forEach(ig => {
+  editItem(item: ShopingListItem, i: number) {
+    // this.ingredients.forEach(ig => {
+    //   if (item.id === ig.id) {
+    //     item.active = true;
+    //     ig.active = true;
+    //   }
+    //   else {
+    //     ig.active = false;
+    //   }
+    // });
+    // this.recipeIngredientService.recipeItemEditIndex.next(item.id);
+    this.shoppingList.forEach(ig => {
       if (item.id === ig.id) {
         item.active = true;
         ig.active = true;
@@ -37,25 +65,32 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       else {
         ig.active = false;
       }
-    })
+    });
     item.dto = 0;
-    this.recipeIngredientService.recipeItemEditIndex.next(item.id);
+    this.shoppingListService.shoppingListItemToUpdateId.next(item.recipeIngredient.id);
   }
 
-  deleteItem(item: any, i: number) {
+  deleteItem(item: ShopingListItem, i: number) {
     console.log("delete item", item);
     if (item.active) {
       alert("Item taken for edit cannot be deleted. clear the item from edit first.");
       return;
     }
     item.dto = 1;
+
     // this.recipeIngredientService.recipeItemEditIndex.next({item});
     this.ingredients.splice(i, 1);
+
+    this.shoppingListService.deleteShoppingListItem(item);
   }
 
   ngOnDestroy(): void {
     this.igSub.unsubscribe();
-    this.ingredients.forEach(igItem => {
+    // this.ingredients.forEach(igItem => {
+    //   igItem.active = false;
+    //   igItem.dto = 0;
+    // });
+    this.shoppingList.forEach(igItem => {
       igItem.active = false;
       igItem.dto = 0;
     });
