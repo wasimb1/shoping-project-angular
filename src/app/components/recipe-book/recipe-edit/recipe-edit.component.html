@@ -84,7 +84,8 @@
         <legend>Ingredient Details</legend>
         <div class="row">
           <div class="col-md-6 py-2">
-            <app-search-ingredient-list *ngIf="selectedIndex <=-1" (selectedIngredient)="onIngredientSelect($event)"></app-search-ingredient-list>
+            <app-search-ingredient-list *ngIf="selectedIndex <=-1"
+              (selectedIngredient)="onIngredientSelect($event)" [clearInput]="clearIngInput"></app-search-ingredient-list>
             <div class="input-group" *ngIf="selectedIndex >= 0">
               <span class="input-group-text" id="ingredientnamelabel">Name</span>
               <input autocomplete="on" [formControlName]="'name'" [id]="'ingredientname'" type="text" class="form-control"

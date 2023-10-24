@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col">
+    <div class="modal-header py-2">
+			<h4 class="modal-title {{modalClass}}">{{modalTitle}}</h4>
+			<button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+		</div>
+		<div class="modal-body">
+			<p>{{ modalMesaage }}!</p>
+		</div>
+		<div class="modal-footer py-1">
+			<button type="button" class="btn btn-outline-danger" (click)="activeModal.close('Close click')">Ok</button>
+		</div>
+  </div>
+</div>

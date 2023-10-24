@@ -1,0 +1,36 @@
+.Block, .Error{
+  position: relative;
+  top: -9px;
+  background: #dc3545;
+  color: white;
+  padding: 3px 24px;
+  border-radius: 0px 0px 8px 8px;
+  font-size: 1.1rem !important;
+}
+.Information{
+  position: relative;
+  top: -8px;
+  background: #336bbd;
+  color: white;
+  padding: 3px 24px;
+  border-radius: 0px 0px 8px 8px;
+  font-size: 1.1rem !important;
+}
+.Warning{
+  position: relative;
+  top: -8px;
+  background: #ebc502;
+  color: white;
+  padding: 3px 24px;
+  border-radius: 0px 0px 8px 8px;
+  font-size: 1.1rem !important;
+}
+.Success{
+  position: relative;
+  top: -8px;
+  background: #198754;
+  color: white;
+  padding: 3px 24px;
+  border-radius: 0px 0px 8px 8px;
+  font-size: 1.1rem !important;
+}

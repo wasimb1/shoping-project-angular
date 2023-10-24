@@ -2,9 +2,9 @@
   <div class="input-group">
     <span class="input-group-text" id="ingName">Name</span>
     <input
-      id="ingredientName" (input)="fetchIngredients(ingName)" (keyup.enter)="fetchIngredients(ingName)"
-      (keyup.tab)="closeItemList($event)"
-      #ingName class="form-control"
+      id="ingredientName" (input)="fetchIngredients()" (keyup.enter)="fetchIngredients()"
+      (keyup.tab)="closeItemList($event)" [(ngModel)]="inputValue"
+      class="form-control"
       aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
   </div>
 

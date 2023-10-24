@@ -9,14 +9,14 @@
       *ngFor="let item of shoppingList; index as i">
         <li
           class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
-          [ngClass]="{active: item.active}"
+          [ngClass]="{active: i== currentIndex}"
           *ngIf="item.dto === 0"
         >
           <div class="ms-2 me-auto">
             <div class="fw-bold d-flex align-items-center">{{item?.name}}
-              <span class="badge bg-primary rounded-pill ms-2">{{item.recipeIngredient?.quantity}}</span>
+              <span class="badge bg-primary rounded-pill ms-2">{{item?.quantity}}</span>
             </div>
-            <p>{{item.recipeIngredient?.description}}</p>
+            <p>{{item?.description}}</p>
           </div>
 
           <div class="shopingActions">

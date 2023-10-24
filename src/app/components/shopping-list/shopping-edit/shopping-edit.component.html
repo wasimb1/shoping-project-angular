@@ -4,11 +4,18 @@
             <fieldset>
                 <div class="row my-3">
                     <div class="col-sm-7 mb-3">
-                        <div class="input-group">
+                        <!-- <div class="input-group">
                             <span class="input-group-text" id="ingName">Name</span>
                             <input
                               [formControlName]="'name'" [id]="'name'" type="text" class="form-control"
                               aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                        </div> -->
+                        <app-search-ingredient-list *ngIf="!isEdit"
+                          (selectedIngredient)="onIngredientSelect($event)" [clearInput]="clearIngInput"></app-search-ingredient-list>
+                        <div class="input-group" *ngIf="isEdit">
+                          <span class="input-group-text" id="ingredientnamelabel">Name</span>
+                          <input autocomplete="on" [formControlName]="'name'" [id]="'ingredientname'" type="text" class="form-control"
+                            aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
                     </div>
                     <div class="col-sm-5">
@@ -18,9 +25,20 @@
                               [formControlName]="'quantity'" [id]="'quantity'" type="number" class="form-control"
                               aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
                         </div>
-                        <span *ngIf="shoppingListForm.get('quantity').hasError('pattern')" class="errorMsg">
-                          Quantity must be greater than 0
-                        </span>
+                        <div class="d-flex flex-column" *ngIf="shoppingListForm.get('quantity').invalid && (shoppingListForm.get('quantity').dirty || shoppingListForm.get('quantity').touched)">
+                          <div class="errorMsg" *ngIf="shoppingListForm.get('quantity').hasError('quantityGreater'); else elseBlock">
+                            Quantity must be less than {{editItem.quantity}}.
+                          </div>
+                          <ng-template #elseBlock>
+                            <p class="errorMsg">Invalid Quantity.</p>
+                          </ng-template>
+                          <!-- <div *ngIf="shoppingListForm.get('quantity').hasError('pattern')" class="errorMsg">
+                            Quantity must be valid/ Positive number.
+                          </div>
+                          <div *ngIf="shoppingListForm.get('quantity').hasError('required')" class="errorMsg">
+                            Input cannot be empty.
+                           </div> -->
+                        </div>
                     </div>
                     <div class="col pt-1">
                         <textarea [formControlName]="'description'" [id]="'description'" type="text" class="form-control" aria-label="Sizing example input"

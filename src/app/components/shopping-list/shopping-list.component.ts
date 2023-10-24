@@ -13,6 +13,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: any[] = [];
   igSub: Subscription;
   shoppingList: ShopingListItem[] = [];
+  currentIndex: number = -1;
 
   constructor(
     private recipeIngredientService: RecipeIngredientService,
@@ -44,6 +45,11 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     this.shoppingList.forEach(igItem => {
       igItem.active = false;
     });
+
+    this.igSub = this.shoppingListService.shoppingListItemToUpdate.subscribe(
+      ({ item, index }) => {
+        this.currentIndex = index;
+      });
   }
 
   editItem(item: ShopingListItem, i: number) {
@@ -57,17 +63,19 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     //   }
     // });
     // this.recipeIngredientService.recipeItemEditIndex.next(item.id);
-    this.shoppingList.forEach(ig => {
-      if (item.id === ig.id) {
-        item.active = true;
-        ig.active = true;
-      }
-      else {
-        ig.active = false;
-      }
-    });
+    // this.shoppingList.forEach(ig => {
+    //   if (item.id === ig.id) {
+    //     item.active = true;
+    //     ig.active = true;
+    //   }
+    //   else {
+    //     ig.active = false;
+    //   }
+    // });
+    this.currentIndex = i;
     item.dto = 0;
-    this.shoppingListService.shoppingListItemToUpdateId.next(item.recipeIngredient.id);
+    const itmUpdate: {item: ShopingListItem, index: number} = {item , index:i}
+    this.shoppingListService.shoppingListItemToUpdate.next(itmUpdate);
   }
 
   deleteItem(item: ShopingListItem, i: number) {
@@ -90,6 +98,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     //   igItem.active = false;
     //   igItem.dto = 0;
     // });
+    this.currentIndex = -1;
     this.shoppingList.forEach(igItem => {
       igItem.active = false;
       igItem.dto = 0;

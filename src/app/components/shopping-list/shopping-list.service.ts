@@ -10,12 +10,11 @@ export class ShoppingListService {
   shoppingListItems: ShopingListItem[] = [];
   constructor(
     private recipeIngredientService: RecipeIngredientService,
-    private recipeBookService: RecipeBookService
-  ) {}
+    private recipeBookService: RecipeBookService  ) {}
 
   shoppingListUpdated = new Subject<ShopingListItem[]>();
-  shoppingListItemToUpdateId = new Subject<string>();
-  isElementActive = new Subject<boolean>();
+  shoppingListItemToUpdate = new Subject<{ item?: ShopingListItem, index: number }>();
+  currentItemIndex = new Subject<number>();
 
   getAllShoppingListItems() {
     return this.shoppingListItems;
@@ -26,20 +25,23 @@ export class ShoppingListService {
   }
 
   AddShoppingListItem(shoppingListItem: ShopingListItem): boolean {
-    let shoppingListItemExist = this.shoppingListItems.find(shpItem => shpItem.id === shoppingListItem.id || shpItem.name.toLowerCase() === shoppingListItem.name.toLowerCase());
+    let shoppingListItemExist = this.shoppingListItems.find(shpItem => shpItem.recipeIngredientId === shoppingListItem.recipeIngredientId || shpItem.name.toLowerCase() === shoppingListItem.name.toLowerCase());
     if (!shoppingListItemExist) {
       const newShoppingListItem = new ShopingListItem(
         this.shoppingListItems.length.toString() + 1,
         shoppingListItem.name,
         shoppingListItem.quantity,
+        shoppingListItem.description,
         shoppingListItem.recipeId,
         shoppingListItem.recipeName,
         shoppingListItem.addedViaRecipe,
-        shoppingListItem.recipeIngredient,
+        shoppingListItem.recipeIngredientId,
+        shoppingListItem.recipeIngredientName,
         shoppingListItem.active,
         shoppingListItem.dto
       )
-      this.shoppingListItems.push(shoppingListItem);
+      this.shoppingListItems.push(newShoppingListItem);
+      this.recipeIngredientService.updateIngredientQuantityById(shoppingListItem.recipeIngredientId, shoppingListItem.quantity, 2);
       this.shoppingListUpdated.next(this.shoppingListItems);
     }
     else
@@ -47,17 +49,20 @@ export class ShoppingListService {
     return Boolean(!shoppingListItemExist);
   }
 
-  updateShoppingListItem(shoppingListItem: ShopingListItem): number {
-    const index: number = this.shoppingListItems.findIndex(shpItem => shpItem.id== shoppingListItem.id);
+  updateShoppingListItem(shoppingListItem: ShopingListItem, mode: number): number {
+    const index: number = this.shoppingListItems.findIndex(shpItem => shpItem.id == shoppingListItem.id);
+    let updatedQty: number = 0;
     if (index > -1) {
-      this.shoppingListItems[index].id = shoppingListItem.id;
-      this.shoppingListItems[index].name = shoppingListItem.name;
+      // this.shoppingListItems[index].id = shoppingListItem.id;
+      // this.shoppingListItems[index].name = shoppingListItem.name;
+      updatedQty =  Math.abs(+this.shoppingListItems[index].quantity - +shoppingListItem.quantity);
       this.shoppingListItems[index].quantity = shoppingListItem.quantity;
-      this.shoppingListItems[index].recipeId = shoppingListItem.recipeId;
-      this.shoppingListItems[index].recipeName = shoppingListItem.recipeName;
-      this.shoppingListItems[index].addedViaRecipe = shoppingListItem.addedViaRecipe;
-      this.shoppingListItems[index].recipeIngredient = shoppingListItem.recipeIngredient;
+      // this.shoppingListItems[index].recipeId = shoppingListItem.recipeId;
+      // this.shoppingListItems[index].recipeName = shoppingListItem.recipeName;
+      // this.shoppingListItems[index].addedViaRecipe = shoppingListItem.addedViaRecipe;
+      // this.shoppingListItems[index].recipeIngredient = shoppingListItem.recipeIngredient;
     }
+    this.recipeIngredientService.updateIngredientQuantityById(shoppingListItem.recipeIngredientId, updatedQty, mode);
     this.shoppingListUpdated.next(this.shoppingListItems);
     return index;
   }

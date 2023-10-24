@@ -4,11 +4,13 @@ export class ShopingListItem {
   constructor(
     public id: string,
     public name: String,
-    public quantity: Number,
+    public quantity: number,
+    public description: string,
     public recipeId: string,
     public recipeName: string,
     public addedViaRecipe: number,
-    public recipeIngredient: RecipeIngredient,
+    public recipeIngredientId: string,
+    public recipeIngredientName: string,
     public active: boolean,
     public dto: number
   ) { }

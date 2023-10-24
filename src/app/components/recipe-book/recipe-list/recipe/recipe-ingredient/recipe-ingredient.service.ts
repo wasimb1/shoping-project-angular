@@ -92,6 +92,18 @@ export class RecipeIngredientService {
       this.recipeIngredients.splice(index, 1, editItemExists);
     }
   }
+  updateIngredientQuantityById(id: string, consumedQty: number, mode:number){
+    let editItemExists = this.getRecipeItem(id);
+    if(editItemExists){
+      let index = this.recipeIngredients.findIndex(item => item.id === id);
+      if (index !== -1) {
+        if (mode === 1)
+        this.recipeIngredients[index].quantity = this.recipeIngredients[index].quantity + consumedQty;
+        else if (mode === 2)
+        this.recipeIngredients[index].quantity = this.recipeIngredients[index].quantity - consumedQty;
+      }
+    }
+  }
 
   deleteIngredient(id: string){
     let editItemExists = this.getRecipeItem(id);

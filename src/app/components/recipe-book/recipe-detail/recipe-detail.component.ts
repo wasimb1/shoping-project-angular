@@ -47,8 +47,13 @@ export class RecipeDetailComponent implements OnInit {
         this.recipe.id + rcItem.id,
         rcItem.name,
         rcItem.quantity,
-        this.recipe.id, this.recipe.name,
-        1, rcItem, false, 0
+        rcItem.description,
+        this.recipe.id,
+        this.recipe.name,
+        1,
+        rcItem.id,
+        rcItem.name,
+        false, 0
       );
       console.log("newShopLstItem: ", newShopLstItem);
       added = this.shoppingListService.AddShoppingListItem(newShopLstItem);

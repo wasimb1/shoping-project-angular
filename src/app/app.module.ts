@@ -19,6 +19,9 @@ import { FirstcomponentComponent } from './components/firstcomponent/firstcompon
 import { RecipeEditComponent } from './components/recipe-book/recipe-edit/recipe-edit.component';
 import { ClickOutsideDirective } from './directives/click-outside.directive';
 import { SearchIngredientListComponent } from './common/components/search-ingredient-list/search-ingredient-list.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmationModalComponent } from './common/components/modals/confirmation-modal/confirmation-modal.component';
+import { GeneralModalComponent } from './common/components/modals/general-modal/general-modal.component';
 
 
 
@@ -38,7 +41,9 @@ import { SearchIngredientListComponent } from './common/components/search-ingred
         FirstcomponentComponent,
         RecipeEditComponent,
       ClickOutsideDirective,
-      SearchIngredientListComponent
+      SearchIngredientListComponent,
+      ConfirmationModalComponent,
+      GeneralModalComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
@@ -46,7 +51,8 @@ import { SearchIngredientListComponent } from './common/components/search-ingred
         BrowserModule,
         FormsModule,
         appRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgbModule
     ]
 })
 export class AppModule {}
