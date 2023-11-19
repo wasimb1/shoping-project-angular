@@ -75,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "shoping-project:build:production"
+              "buildTarget": "shoping-project:build:production"
             },
             "development": {
-              "browserTarget": "shoping-project:build:development"
+              "buildTarget": "shoping-project:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "shoping-project:build"
+            "buildTarget": "shoping-project:build"
           }
         },
         "test": {
