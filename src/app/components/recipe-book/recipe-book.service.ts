@@ -8,59 +8,64 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class RecipeBookService {
-  recipes: Recipe[] = [];
+  private recipes: Recipe[] = [];
   recipesUpdated = new Subject<Recipe[]>();
   constructor(private RecipeIngredientService: RecipeIngredientService) {
-    this.recipes = [
-      new Recipe(
-        '1',
-        'Recipe 01',
-        'This is first recipe.',
-        'https://thumbs.dreamstime.com/z/home-cooking-logo-yellow-background-eps-home-cooking-logo-yellow-background-193149392.jpg',
-        [
-          ...this.RecipeIngredientService.getRecipeItems().filter(
-            (ri) => ri.id === '1' || ri.id === '2'
-          )
-        ]
-      ),
-      new Recipe(
-        '2',
-        'Recipe 02',
-        'This is Second recipe.',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj2BvNtjmNPge_0hUtLsKvq1jR8ElNzkaAzw&usqp=CAU',
-        [
-          ...this.RecipeIngredientService.getRecipeItems().filter(
-            (ri) => ri.id === '1' || ri.id === '3'
-          )
-        ]
-      ),
-      new Recipe(
-        '3',
-        'Recipe 03',
-        'This is third recipe.',
-        'https://thumbs.dreamstime.com/z/home-cooking-logo-yellow-background-eps-home-cooking-logo-yellow-background-193149392.jpg',
-        [
-          ...this.RecipeIngredientService.getRecipeItems().filter(
-            (ri) => ri.id === '3' || ri.id === '2'
-          )
-        ]
-      ),
-      new Recipe(
-        '4',
-        'Recipe 04',
-        'This is fourth recipe.',
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj2BvNtjmNPge_0hUtLsKvq1jR8ElNzkaAzw&usqp=CAU',
-        [
-          ...this.RecipeIngredientService.getRecipeItems().filter(
-            (ri) => ri.id === '4' || ri.id === '5'
-          )
-        ]
-      ),
-    ];
+    // this.recipes = [
+    //   new Recipe(
+    //     '1',
+    //     'Recipe 01',
+    //     'This is first recipe.',
+    //     'https://thumbs.dreamstime.com/z/home-cooking-logo-yellow-background-eps-home-cooking-logo-yellow-background-193149392.jpg',
+    //     [
+    //       ...this.RecipeIngredientService.getRecipeItems().filter(
+    //         (ri) => ri.id === '1' || ri.id === '2'
+    //       )
+    //     ]
+    //   ),
+    //   new Recipe(
+    //     '2',
+    //     'Recipe 02',
+    //     'This is Second recipe.',
+    //     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj2BvNtjmNPge_0hUtLsKvq1jR8ElNzkaAzw&usqp=CAU',
+    //     [
+    //       ...this.RecipeIngredientService.getRecipeItems().filter(
+    //         (ri) => ri.id === '1' || ri.id === '3'
+    //       )
+    //     ]
+    //   ),
+    //   new Recipe(
+    //     '3',
+    //     'Recipe 03',
+    //     'This is third recipe.',
+    //     'https://thumbs.dreamstime.com/z/home-cooking-logo-yellow-background-eps-home-cooking-logo-yellow-background-193149392.jpg',
+    //     [
+    //       ...this.RecipeIngredientService.getRecipeItems().filter(
+    //         (ri) => ri.id === '3' || ri.id === '2'
+    //       )
+    //     ]
+    //   ),
+    //   new Recipe(
+    //     '4',
+    //     'Recipe 04',
+    //     'This is fourth recipe.',
+    //     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj2BvNtjmNPge_0hUtLsKvq1jR8ElNzkaAzw&usqp=CAU',
+    //     [
+    //       ...this.RecipeIngredientService.getRecipeItems().filter(
+    //         (ri) => ri.id === '4' || ri.id === '5'
+    //       )
+    //     ]
+    //   ),
+    // ];
   }
 
   getRecipes() {
     return this.recipes.slice();
+  }
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesUpdated.next(this.recipes.slice());
   }
 
   getRecipe(id: string) {
@@ -115,8 +120,5 @@ export class RecipeBookService {
       });
     }
     this.recipesUpdated.next(this.recipes);
-  }
-  async checkRecipeItemExistsInOtherRecipes(recipe: Recipe) {
-
   }
 }

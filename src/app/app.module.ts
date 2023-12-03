@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -23,36 +24,35 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationModalComponent } from './common/components/modals/confirmation-modal/confirmation-modal.component';
 import { GeneralModalComponent } from './common/components/modals/general-modal/general-modal.component';
 
-
-
 @NgModule({
-    declarations: [
-        AppComponent,
-        HeaderComponent,
-        ShoppingListComponent,
-        RecipeBookComponent,
-        RecipeListComponent,
-        RecipeIngredientComponent,
-        RecipeDetailComponent,
-        ShoppingEditComponent,
-        FooterComponent,
-        RecipeComponent,
-        AppBackgroundDirective,
-        FirstcomponentComponent,
-        RecipeEditComponent,
-      ClickOutsideDirective,
-      SearchIngredientListComponent,
-      ConfirmationModalComponent,
-      GeneralModalComponent
-    ],
-    providers: [],
-    bootstrap: [AppComponent],
-    imports: [
-        BrowserModule,
-        FormsModule,
-        appRoutingModule,
-        ReactiveFormsModule,
-        NgbModule
-    ]
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    ShoppingListComponent,
+    RecipeBookComponent,
+    RecipeListComponent,
+    RecipeIngredientComponent,
+    RecipeDetailComponent,
+    ShoppingEditComponent,
+    FooterComponent,
+    RecipeComponent,
+    AppBackgroundDirective,
+    FirstcomponentComponent,
+    RecipeEditComponent,
+    ClickOutsideDirective,
+    SearchIngredientListComponent,
+    ConfirmationModalComponent,
+    GeneralModalComponent
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    FormsModule,
+    appRoutingModule,
+    ReactiveFormsModule,
+    NgbModule,
+    HttpClientModule
+  ]
 })
-export class AppModule {}
+export class AppModule { }
